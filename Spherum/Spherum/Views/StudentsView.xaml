@@ -1,0 +1,94 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Spherum.Views.StudentsView"
+             Title="Student List"
+             xmlns:ios="clr-namespace:Microsoft.Maui.Controls.PlatformConfiguration.iOSSpecific;assembly=Microsoft.Maui.Controls"
+             ios:Page.UseSafeArea="True"
+             x:Name="this"
+             xmlns:vm="clr-namespace:Spherum.ViewModels"
+             xmlns:behavior="clr-namespace:Spherum.Behaviors"
+             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+>
+    
+    <CollectionView ItemsSource="{Binding Students}" 
+                    Margin="10"
+                    BackgroundColor="Transparent"
+                    SelectionMode="Single"
+                    SelectedItem="{Binding SelectedStudent}"
+                    RemainingItemsThreshold="1"
+                    ItemSizingStrategy="MeasureFirstItem"
+                    RemainingItemsThresholdReachedCommand="{Binding LoadMoreStudentsCommand}">
+        <CollectionView.ItemTemplate>
+            <DataTemplate>
+                <Grid Margin="10">
+                <Border Margin="10" 
+                                HeightRequest="100"
+                Stroke="{StaticResource Secondary}" BackgroundColor="{StaticResource Primary}"
+                StrokeThickness="1"
+                    Padding="10"
+                StrokeShape="RoundRectangle 8">
+
+                            <Grid RowDefinitions="*,*" ColumnDefinitions="Auto,*" ColumnSpacing="20" IgnoreSafeArea="True">
+                                <Label Text="Id :"  Grid.Row="0" Grid.Column="0" FontSize="20" TextColor="White"/>
+                                <Label Text="Name :" Grid.Row="1" Grid.Column="0" FontSize="20" TextColor="White"/>
+                                  <Label Text="{Binding Id}" Grid.Row="0" Grid.Column="1" FontSize="20" TextColor="White" />
+                            <Label Text="{Binding Name}" FontSize="20" Grid.Row="1" Grid.Column="1" TextColor="White" />
+                            </Grid>
+
+                    <Border.Triggers>
+                        <DataTrigger TargetType="Border" Binding="{Binding IsSelected}" Value="True">
+
+                            <Setter Property="BackgroundColor" Value="{StaticResource Secondary}"/>
+                             <Setter Property="Stroke" Value="{StaticResource Primary}"/>
+                        </DataTrigger>
+
+                    </Border.Triggers>
+
+                            </Border>
+                    <Grid.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding ItemClickedCommand, Source={RelativeSource AncestorType={x:Type vm:StudentsViewModel}}}" CommandParameter="{Binding .}"/>
+
+                    </Grid.GestureRecognizers>
+                  </Grid>
+            </DataTemplate>
+        </CollectionView.ItemTemplate>
+    </CollectionView>
+    <!--<Grid>
+    <ListView ItemsSource="{Binding Students}"
+
+                  HasUnevenRows="True">
+         <ListView.Behaviors>
+            <behavior:ListViewItemClickBehavior Command="{Binding ItemClickedCommand}"/>
+        </ListView.Behaviors>
+        <ListView.ItemTemplate>
+                <DataTemplate>
+                    <ViewCell>
+                        <Border Margin="10"
+                                HeightRequest="100"
+                Stroke="{StaticResource Secondary}" BackgroundColor="{StaticResource Primary}"
+                StrokeThickness="1"
+                    Padding="10"
+                StrokeShape="RoundRectangle 8">
+
+                            <Grid RowDefinitions="*,*" ColumnDefinitions="Auto,*" ColumnSpacing="20">
+
+                                <Label Text="Id :"  Grid.Row="0" Grid.Column="0" FontSize="20" TextColor="White"/>
+                                <Label Text="Name :" Grid.Row="1" Grid.Column="0" FontSize="20" TextColor="White"/>
+                                  <Label Text="{Binding Id}" Grid.Row="0" Grid.Column="1" FontSize="20" TextColor="White" />
+                            <Label Text="{Binding Name}" FontSize="20" Grid.Row="1" Grid.Column="1" TextColor="White" />
+                            </Grid>
+
+                            </Border>
+                    </ViewCell>
+
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+    <ActivityIndicator IsRunning="{Binding IsBusy}"
+                           IsVisible="{Binding IsBusy}"
+                           VerticalOptions="EndAndExpand"
+                           HorizontalOptions="Center"
+                           Color="Gray" />
+        </Grid>-->
+</ContentPage>

@@ -1,0 +1,38 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Spherum.Views.StudentDetailsView"
+             xmlns:ios="clr-namespace:Microsoft.Maui.Controls.PlatformConfiguration.iOSSpecific;assembly=Microsoft.Maui.Controls"
+             ios:Page.UseSafeArea="True"
+             Title="Student Details">
+
+
+    <VerticalStackLayout Padding="10" IgnoreSafeArea="True" BackgroundColor="White">
+        <Border Margin="10"
+                Stroke="{StaticResource Secondary}" BackgroundColor="{StaticResource Primary}"
+                StrokeThickness="1"
+                Padding="10"
+                StrokeShape="RoundRectangle 8">
+            <Grid RowDefinitions="*,*,*,*,*" RowSpacing="10" ColumnDefinitions="Auto,*" ColumnSpacing="20">
+                <Label Text="Id :"  Grid.Row="0" Grid.Column="0" FontSize="20" TextColor="White"/>
+                <Label Text="Name :" Grid.Row="1" Grid.Column="0" FontSize="20" TextColor="White"/>
+                <Label Text="Age :" Grid.Row="2" Grid.Column="0" FontSize="20" TextColor="White"/>
+                <Label Text="Phone Number :" Grid.Row="3" Grid.Column="0" FontSize="20" TextColor="White"/>
+                <Label Text="Address :" Grid.Row="4" Grid.Column="0" FontSize="20" TextColor="White"/>
+
+                <Label Text="{Binding SelectedStudent.Id}" BackgroundColor="Transparent" Grid.Row="0" Grid.Column="1" FontSize="20" TextColor="White" />
+                <Label Text="{Binding SelectedStudent.Name}" FontSize="20" Grid.Row="1" Grid.Column="1" TextColor="White" />
+                <Label Text="{Binding SelectedStudent.Age}" FontSize="20" Grid.Row="2" Grid.Column="1" TextColor="White" />
+                <Label Text="{Binding SelectedStudent.PhoneNumber}" FontSize="20" Grid.Row="3" Grid.Column="1" TextColor="White" />
+                <Label Text="{Binding SelectedStudent.Address}" FontSize="20" Grid.Row="4" Grid.Column="1" TextColor="White" MaxLines="2" />
+            </Grid>
+
+
+            
+        </Border>
+
+        <Button HorizontalOptions="Fill" Command="{Binding GoToFillFormViewCommand}" Text="Fill Form" Margin="10,20" FontSize="20" TextColor="White" BackgroundColor="{StaticResource Primary}" CornerRadius="10"
+
+                />
+    </VerticalStackLayout>
+</ContentPage>
